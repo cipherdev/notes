@@ -14,7 +14,6 @@ OPENBMC HOW TO
 .. toctree::
    :maxdepth: 1
    :maxdepth: 2
-   :hidden:
    :caption: 📚 Reference
 
    opennbmc_how_to

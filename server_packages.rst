@@ -1,4 +1,4 @@
-Server Packages
+Server Setting
 ====================
 
 Ubuntu 
@@ -16,3 +16,30 @@ x86 20.04 Ubuntu
 
 Copy Public Key to Machine remote
     ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.38.152.2
+
+Samba 
+~~~~~~
+.. code-block:: samba
+
+    # How to install
+    sudo apt-get install -y samba
+    systemctl status smbd
+    # Create the password for samba user
+    smbpasswd -a itcs
+    # Create a Shared Directory
+    mkdir -p /app
+    vim /etc/samba/smb.conf
+        [app]
+        comment = App folder share
+        path = /app
+        writable = yes
+        browseable = yes
+        guest ok = no
+        valid users = @itcs
+    # Allow samba firewalld
+    ufw allow samba
+    # Restart samba service
+    systemctl restart smbd
+    systemctl status smbd
+    # Windown or TotalCommander to connect share folder
+    smb://192.168.80.130/app
