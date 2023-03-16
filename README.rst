@@ -1,82 +1,228 @@
-Welcome to Read the Docs
-========================
+VCS Integrations
+================
 
-|build-status| |docs| |coverage|
+Read the Docs provides integrations with several VCS providers to detect changes to your
+documentation and versions, mainly using *webhooks*.
+Integrations are configured with your repository provider,
+such as GitHub, Bitbucket or GitLab,
+and with each change to your repository, Read the Docs is notified. When we
+receive an integration notification, we determine if the change is related to an
+active version for your project, and if it is, a build is triggered for that
+version.
 
-Purpose
--------
+You'll find a list of configured integrations on your project's :guilabel:`Admin`
+dashboard, under :guilabel:`Integrations`. You can select any of these integrations to
+see the *integration detail page*. This page has additional configuration
+details and a list of HTTP exchanges that have taken place for the integration,
+including the Payload URL needed by the repository provider
+such as GitHub, GitLab, or Bitbucket.
 
-`Read the Docs`_ hosts documentation for the open source community. It supports
-Sphinx_ docs written with reStructuredText_, and can pull from your Subversion_,
-Bazaar_, Git_, and Mercurial_ repositories.
-Then we build documentation and host it for you.
-Think of it as *Continuous Documentation*.
+Integration Creation
+--------------------
 
-.. _Read the docs: https://readthedocs.org/
-.. _Sphinx: http://www.sphinx-doc.org/
-.. _reStructuredText: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
-.. _Subversion: http://subversion.tigris.org/
-.. _Bazaar: http://bazaar.canonical.com/
-.. _Git: http://git-scm.com/
-.. _Mercurial: https://www.mercurial-scm.org/
+To manually set up an integration, go to :guilabel:`Admin` > :guilabel:`Integrations` >  :guilabel:`Add integration`
+dashboard page and select the integration type you'd like to add.
+After you have added the integration, you'll see a link to information about the integration.
 
-Documentation for RTD
----------------------
+As an example, the URL pattern looks like this: *https://readthedocs.org/api/v2/webhook/<project-name>/<id>/*.
 
-You will find complete documentation for setting up your project at `the Read
-the Docs site`_.
+Use this URL when setting up a new integration with your provider -- these steps vary depending on the provider.
 
-.. _the Read the Docs site: https://docs.readthedocs.io/
+.. note::
 
-Get in touch
-------------
+   If your account is connected to the provider,
+   we'll try to setup the integration automatically.
+   If something fails, you can still setup the integration manually.
 
-You can find information about getting in touch with Read the Docs at our `Contribution page <https://docs.readthedocs.io/en/latest/contribute.html#get-in-touch>`_.
+.. _webhook-integration-github:
 
-Contributing
-------------
+GitHub
+~~~~~~
 
-You can find information about contributing to Read the Docs at our `Contribution page <https://docs.readthedocs.io/en/latest/contribute.html>`_.
+* Go to the :guilabel:`Settings` page for your **GitHub project**
+* Click :guilabel:`Webhooks` > :guilabel:`Add webhook`
+* For **Payload URL**, use the URL of the integration on your **Read the Docs project**,
+  found on the project's :guilabel:`Admin` > :guilabel:`Integrations` page.
+  You may need to prepend *https://* to the URL.
+* For **Content type**, both *application/json* and
+  *application/x-www-form-urlencoded* work
+* Leave the **Secrets** field blank
+* Select **Let me select individual events**,
+  and mark **Branch or tag creation**, **Branch or tag deletion**, **Pull requests** and **Pushes** events
+* Ensure **Active** is enabled; it is by default
+* Finish by clicking **Add webhook**.  You may be prompted to enter your GitHub password to confirm your action.
 
-Quickstart for GitHub-Hosted Projects
--------------------------------------
+You can verify if the webhook is working at the bottom of the GitHub page under **Recent Deliveries**.
+If you see a Response 200, then the webhook is correctly configured.
+For a 403 error, it's likely that the Payload URL is incorrect.
 
-By the end of this quickstart, you will have a new project automatically updated
-when you push to GitHub.
+.. note:: The webhook token, intended for the GitHub **Secret** field, is not yet implemented.
 
-#. Create an account on `Read the Docs`_.  You will get an email verifying your
-   email address which you should accept within 7 days.
+.. _webhook-integration-bitbucket:
 
-#. Log in and click on "Import a Project".
+Bitbucket
+~~~~~~~~~
 
-#. Click "Connect to GitHub" in order to connect your account's repositories to GitHub.
+* Go to the :guilabel:`Settings` > :guilabel:`Webhooks` > :guilabel:`Add webhook` page for your project
+* For **URL**, use the URL of the integration on Read the Docs,
+  found on the :guilabel:`Admin` > :guilabel:`Integrations`  page
+* Under **Triggers**, **Repository push** should be selected
+* Finish by clicking **Save**
 
-#. When prompted on GitHub, give access to your account.
+.. _webhook-integration-gitlab:
 
-#. Click "Import a Repository" and select any desired repository.
+GitLab
+~~~~~~
 
-#. Change any information if desired and click "Next".
+* Go to the :guilabel:`Settings` > :guilabel:`Webhooks` page for your GitLab project
+* For **URL**, use the URL of the integration on **Read the Docs project**,
+  found on the :guilabel:`Admin` > :guilabel:`Integrations`  page
+* Leave the default **Push events** selected,
+  additionally mark **Tag push events** and **Merge request events**.
+* Finish by clicking **Add Webhook**
 
-#. All done.  Commit away and your project will auto-update.
+Gitea
+~~~~~
 
+These instructions apply to any Gitea instance.
 
-.. |build-status| image:: https://circleci.com/gh/readthedocs/readthedocs.org.svg?style=svg
-    :alt: build status
-    :target: https://circleci.com/gh/readthedocs/readthedocs.org
+.. warning::
 
-.. |docs| image:: https://readthedocs.org/projects/docs/badge/?version=latest
-    :alt: Documentation Status
-    :scale: 100%
-    :target: https://docs.readthedocs.io/en/latest/?badge=latest
+   This isn't officially supported, but using the "GitHub webhook" is an effective workaround,
+   because Gitea uses the same payload as GitHub. The generic webhook is not compatible with Gitea.
+   See `issue #8364`_ for more details. Official support may be implemented in the future.
 
-.. |coverage| image:: https://codecov.io/gh/readthedocs/readthedocs.org/branch/main/graph/badge.svg
-    :alt: Test coverage
-    :scale: 100%
-    :target: https://codecov.io/gh/readthedocs/readthedocs.org
+On Read the Docs:
 
-License
--------
+* Manually create a "GitHub webhook" integration
+  (this will show a warning about the webhook not being correctly set up,
+  that will go away when the webhook is configured in Gitea)
 
-`MIT`_ © 2010 Read the Docs, Inc. & contributors
+On your Gitea instance:
 
-.. _MIT: LICENSE
+* Go to the :guilabel:`Settings` > :guilabel:`Webhooks` page for your project on your Gitea instance
+* Create a new webhook of type "Gitea"
+* For **URL**, use the URL of the integration on Read the Docs,
+  found on the :guilabel:`Admin` > :guilabel:`Integrations` page
+* Leave the default **HTTP Method** as POST
+* For **Content type**, both *application/json* and
+  *application/x-www-form-urlencoded* work
+* Leave the **Secret** field blank
+* Select **Choose events**,
+  and mark **Branch or tag creation**, **Branch or tag deletion** and **Push** events
+* Ensure **Active** is enabled; it is by default
+* Finish by clicking **Add Webhook**
+* Test the webhook with :guilabel:`Delivery test`
+
+Finally, on Read the Docs, check that the warnings have disappeared
+and the delivery test triggered a build.
+
+.. _issue #8364: https://github.com/readthedocs/readthedocs.org/issues/8364
+
+.. _webhook-integration-generic:
+
+Using the generic API integration
+---------------------------------
+
+For repositories that are not hosted with a supported provider, we also offer a
+generic API endpoint for triggering project builds. Similar to webhook integrations,
+this integration has a specific URL, which can be found on the project's **Integrations** dashboard page
+(:guilabel:`Admin` > :guilabel:`Integrations`).
+
+Token authentication is required to use the generic endpoint, you will find this
+token on the integration details page. The token should be passed in as a
+request parameter, either as form data or as part of JSON data input.
+
+Parameters
+~~~~~~~~~~
+
+This endpoint accepts the following arguments during an HTTP POST:
+
+branches
+    The names of the branches to trigger builds for. This can either be an array
+    of branch name strings, or just a single branch name string.
+
+    Default: **latest**
+
+token
+    The integration token found on the project's **Integrations** dashboard page
+    (:guilabel:`Admin` > :guilabel:`Integrations`).
+
+default_branch
+    This is the default branch of the repository
+    (ie. the one checked out when cloning the repository without arguments)
+
+    *Optional*
+
+For example, the cURL command to build the ``dev`` branch, using the token
+``1234``, would be::
+
+    curl -X POST -d "branches=dev" -d "token=1234" -d "default_branch=main"
+    https://readthedocs.org/api/v2/webhook/example-project/1/
+
+A command like the one above could be called from a cron job or from a hook
+inside Git_, Subversion_, Mercurial_, or Bazaar_.
+
+.. _Git: http://www.kernel.org/pub/software/scm/git/docs/githooks.html
+.. _Subversion: https://www.mikewest.org/2006/06/subversion-post-commit-hooks-101
+.. _Mercurial: http://hgbook.red-bean.com/read/handling-repository-events-with-hooks.html
+.. _Bazaar: http://wiki.bazaar.canonical.com/BzrHooks
+
+Authentication
+~~~~~~~~~~~~~~
+
+This endpoint requires authentication. If authenticating with an integration
+token, a check will determine if the token is valid and matches the given
+project. If instead an authenticated user is used to make this request, a check
+will be performed to ensure the authenticated user is an owner of the project.
+
+Debugging webhooks
+------------------
+
+If you are experiencing problems with an existing webhook, you may be able to
+use the integration detail page to help debug the issue. Each project
+integration, such as a webhook or the generic API endpoint, stores the HTTP
+exchange that takes place between Read the Docs and the external source. You'll
+find a list of these exchanges in any of the integration detail pages.
+
+Resyncing webhooks
+------------------
+
+It might be necessary to re-establish a webhook if you are noticing problems.
+To resync a webhook from Read the Docs, visit the integration detail page and
+follow the directions for re-syncing your repository webhook.
+
+Payload validation
+------------------
+
+If your project was imported through a connected account,
+we create a secret for every integration that offers a way to verify that a webhook request is legitimate.
+Currently, `GitHub <https://developer.github.com/webhooks/securing/>`__ and `GitLab <https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#validate-payloads-by-using-a-secret-token>`__
+offer a way to check this.
+
+Troubleshooting
+---------------
+
+Webhook activation failed. Make sure you have the necessary permissions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you find this error,
+make sure your user has permissions over the repository.
+In case of GitHub,
+check that you have granted access to the Read the Docs `OAuth App`_ to your organization.
+
+.. _OAuth App: https://github.com/settings/applications
+
+My project isn't automatically building
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your project isn't automatically building, you can check your integration on
+Read the Docs to see the payload sent to our servers. If there is no recent
+activity on your Read the Docs project webhook integration, then it's likely
+that your VCS provider is not configured correctly. If there is payload
+information on your Read the Docs project, you might need to verify that your
+versions are configured to build correctly.
+
+Either way, it may help to either resync your webhook integration (see
+`Resyncing webhooks`_ for information on this process), or set up an entirely
+new webhook integration.
