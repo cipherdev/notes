@@ -1,46 +1,34 @@
 Documentation and Notes
-############################################################
-
-This project captures guidelines and tips for efficiently creating
-documentation using for me.
-
-This project is also created using the guidelines it describes.
-
-This document is geared towards content creators, not programmers.
-
-OPENBMC HOW TO
-**************
+=======================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: 📚 Reference
+   :hidden:
+   :caption: 🚀 OpenBmc How To
 
-   opennbmc_how_to
-
-DOCKER HOW TO
-*************
+   /openbmc/openbmc_how_to
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
+   :caption: 📚 Docker Guide
 
-   docker_how_to
-
-GIT HOW TO
-**********
-
-.. toctree::
-   :maxdepth: 1
-
-   git_how_to
-
-JENKINS HOW TO
-**************
+   /docker/docker_how_to
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
+   :caption: 💡 Git Guide
 
-   jenkin_install
-   jenkin_command
+   /git/git_how_to
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: 🪄 Jenkin Guide
+
+   /jenkin/jenkin_install
+   /jenkin/jenkin_command
 
 SERVER HOW TO
 *************
@@ -48,8 +36,8 @@ SERVER HOW TO
 .. toctree::
    :maxdepth: 1
 
-   server_dhcp
-   server_packages
-   server_ser2net_mapping_port_to_telnet
+   /server/server_dhcp
+   /server/server_packages
+   /server/server_ser2net_mapping_port_to_telnet
 
 .. add new files to list above to include them in toc
