@@ -12,7 +12,6 @@ OPENBMC HOW TO
 **************
 
 .. toctree::
-   :maxdepth: 1
    :maxdepth: 2
    :caption: 📚 Reference
 
