@@ -18,26 +18,20 @@ Documentation and Notes
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: 💡 Git Guide
+   :caption: 💡 Setup Guide
 
-   /git/git_how_to
+   /setup/git/git_how_to
+   /setup/jenkin/jenkin_install
+   /setup/jenkin/jenkin_command
+   /setup/server/server_dhcp
+   /setup/server/server_packages
+   /setup/server/server_ser2net_mapping_port_to_telnet
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: 🪄 Jenkin Guide
+   :caption: 🪄 Deploy Guide
 
-   /jenkin/jenkin_install
-   /jenkin/jenkin_command
-
-SERVER HOW TO
-*************
-
-.. toctree::
-   :maxdepth: 1
-
-   /server/server_dhcp
-   /server/server_packages
-   /server/server_ser2net_mapping_port_to_telnet
+   /deploy/bash_convert_hex
 
 .. add new files to list above to include them in toc
