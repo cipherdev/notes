@@ -34,5 +34,6 @@ Documentation and Notes
    :caption: 🪄 Deploy Guide
 
    /deploy/bash_convert_hex
+   tables
 
 .. add new files to list above to include them in toc
