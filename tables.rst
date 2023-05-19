@@ -1,4 +1,4 @@
-Use Tables 
+Use Tables
 ###################
 
 Tables are very useful for presenting complex information.
@@ -8,16 +8,17 @@ List Table Directive
 
 The table is displayed in HTML as:
 
-.. list-table:: **Example Tables**
+.. list-table:: **Service Tables Contain**
    :widths: 25 25 50
    :header-rows: 1
 
-   * - STT
-     - Commands
+   * - Unit
+     - Service
      - Notes
-   * - Text
-     - 
-     - Row 1, column 3
+   * - Description
+     - After
+     - Conflicts
+     - OnFailure
    * - Row 2, column 1
      - Row 2, column 2
      - Row 2, column 3
@@ -25,7 +26,28 @@ The table is displayed in HTML as:
      - Row 1, column 3
      - Row 1, column 3
 
-CSV Files 
++-----------------------+---------------+----------+----------+
+|          St           |  Properties   |        Notes        |
+|                       |               |                     |
++=======================+===============+=====================+
+| Unit                  | Description   |                     |
+|                       +---------------+---------------------+
+|                       | After         |                     |
+|                       +---------------+---------------------+
+|                       | Conflicts     |                     |
+|                       +---------------+---------------------+
+|                       | OnFailure     |                     |
++-----------------------+---------------+---------------------+
+| Service               | Type          |                     |
+|                       +---------------+---------------------+
+|                       | ExecStart     |                     |
+|                       +---------------+---------------------+
+|                       |               |                     |
+|                       +---------------+---------------------+
+|                       |               |                     +
++-----------------------+---------------+---------------------+
+
+CSV Files
 ***********************
 
 # Build Customization
