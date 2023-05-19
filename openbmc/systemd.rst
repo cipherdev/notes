@@ -1,13 +1,15 @@
 Systemd How To
 ==============
 OpenBMC uses systemd to manage all processes. It has its own set of target and service units to control which processes are started.
-*  `Unit` - Units are the basic framework of all systemd work.
-* `Service` - Services are a type of unit, that define the processes to be run and execute.
-*  `Target` - Targets are another type of unit, they have two purposes:
 
-Define synchronization points among services.
-Define the services that get run for a given target.
-On an OpenBMC system, you can go to /lib/systemd/system/ and see all of the systemd units on the system. You can easily cat these files to start looking at the relationships among them. Service files can also be found in /etc/systemd/system and /run/systemd/system as well.
+*  `Unit`: Units are the basic framework of all systemd work.
+
+* `Service`: Services are a type of unit, that define the processes to be run and execute.
+
+*  `Target`: Targets are another type of unit, they have two purposes:
+
+Define synchronization points among services. Define the services that get run for a given target.
+On an OpenBMC system, you can go to `/lib/systemd/system/` and see all of the systemd units on the system. You can easily cat these files to start looking at the relationships among them. Service files can also be found in /etc/systemd/system and /run/systemd/system as well.
 
 * `systemctl` is the main tool you use to interact with systemd and its units.
 
