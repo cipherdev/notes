@@ -7,6 +7,7 @@ Documentation and Notes
    :caption: 🚀 OpenBmc How To
 
    /openbmc/openbmc_how_to
+   /openbmc/systemd
 
 .. toctree::
    :maxdepth: 2
